@@ -46,9 +46,6 @@ class _DishListScreenState extends State<DishListScreen> {
         padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
         child: Column(
           children: [
-            ElevatedButton(
-                onPressed: exportToFile,
-                child: const Text("Экспортировать файл")),
             Expanded(
                 child: ListView.separated(
               separatorBuilder: (BuildContext context, int index) =>
@@ -76,6 +73,19 @@ class _DishListScreenState extends State<DishListScreen> {
                 );
               },
             )),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 30),
+              child: ElevatedButton(
+                onPressed: exportToFile,
+                style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 30, vertical: 20)),
+                child: const Text(
+                  "Экспортировать файл",
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+            ),
           ],
         ),
       ),

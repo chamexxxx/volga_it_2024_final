@@ -72,4 +72,24 @@ final dishes = [
         fats: 8.3,
         carbohydrates: 54.6)
   ]),
+  Dish(name: 'Творожник с яблоками', ingredients: [
+    Ingredient(
+        name: 'Сливочное масло',
+        calories: 748,
+        proteins: 0.6,
+        fats: 82.5,
+        carbohydrates: 0.8),
+    Ingredient(
+        name: 'Пшеничная мука хлебопекарная',
+        calories: 331,
+        proteins: 10.6,
+        fats: 1.3,
+        carbohydrates: 67.6),
+    Ingredient(
+        name: 'Мягкий творог',
+        calories: 97,
+        proteins: 8.8,
+        fats: 5,
+        carbohydrates: 4.2)
+  ])
 ];
