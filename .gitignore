@@ -44,3 +44,6 @@ app.*.map.json
 
 # Aurora generated
 /aurora/flutter
+
+# Visual Studio Code
+.vscode
