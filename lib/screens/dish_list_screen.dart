@@ -18,7 +18,23 @@ class DishListScreen extends StatefulWidget {
 class _DishListScreenState extends State<DishListScreen> {
   final List<Dish> _dishes = dishes;
 
-  void exportToFile() async {
+  Future<void> exportToFile(BuildContext context) async {
+    if (dishes.isEmpty) {
+      if (context.mounted) {
+        const snackBar = SnackBar(
+          content: Text(
+            'Нечего выгружать',
+            style: TextStyle(fontSize: 20),
+          ),
+          duration: Duration(seconds: 5),
+        );
+
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      }
+
+      return;
+    }
+
     final Directory appDocumentsDir = await getApplicationDocumentsDirectory();
     final Directory? downloadsDir = await getDownloadsDirectory();
 
@@ -26,9 +42,22 @@ class _DishListScreenState extends State<DishListScreen> {
 
     final fileName = 'Export ${DateTime.now()}.json';
     final exportData = generateExportData();
-    final file = File('$path/$fileName');
+    final filePath = '$path/$fileName';
+    final file = File(filePath);
 
-    file.writeAsString(exportData);
+    await file.writeAsString(exportData);
+
+    if (context.mounted) {
+      final snackBar = SnackBar(
+        content: Text(
+          'Данные были выгружены в файл $filePath',
+          style: const TextStyle(fontSize: 20),
+        ),
+        duration: const Duration(seconds: 5),
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
   }
 
   String generateExportData() {
@@ -76,7 +105,7 @@ class _DishListScreenState extends State<DishListScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 30),
               child: ElevatedButton(
-                onPressed: exportToFile,
+                onPressed: () => exportToFile(context),
                 style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 30, vertical: 20)),
